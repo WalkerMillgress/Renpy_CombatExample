@@ -1,11 +1,16 @@
 ﻿define p = Character("Protagonista")
 define m = Character("Monstruo")
 define p = Character("Profesor")
+define gb = Character("Goblin")
 
 default p_health = 30
 default p_atk = 0
 default p_def = 0
 default p_def_mod = 0
+default p_gold = 0
+
+default goblinFriend = False
+
 
 default m_health = 30
 default m_atk = 0
@@ -58,12 +63,20 @@ label battle:
         jump derrota
     elif (m_health <= 0):
         "¡Mataste al monstruo!"
+
+        $ p_gold = renpy.random.randint(1, 25)
+
         jump victoria
     else:
         jump battle
 
 label victoria:
     "¡Lo lograste!"
+    "Tienes [p_gold] monedas de oro."
+
+    if goblinFriend:
+        gb "¡Lo lograste! Sos genial."
+
     return
 
 label derrota:
