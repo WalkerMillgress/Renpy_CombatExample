@@ -7,14 +7,17 @@ default p_health = 30
 default p_atk = 0
 default p_def = 0
 default p_def_mod = 0
-default p_gold = 0
+default p_gold = 6
 
 default goblinFriend = False
-
 
 default m_health = 30
 default m_atk = 0
 default m_def = 0
+
+
+default item_1_nombre = "Botella"
+default item_1_precio = 5 
 
 label start:
 
@@ -38,7 +41,7 @@ label start:
     $ m_atk = renpy.random.randint(1, 25)
     $ m_def = renpy.random.randint(1, 5)
 
-    jump battle
+    jump store
 
 label battle:
     $ p_def_mod = 0
@@ -64,7 +67,12 @@ label battle:
     elif (m_health <= 0):
         "¡Mataste al monstruo!"
 
-        $ p_gold = renpy.random.randint(1, 25)
+        $ p_gold += renpy.random.randint(1, 25)
+
+        $ goblinFriend = True
+
+        if goblinFriend:
+            jump aventuraGoblin
 
         jump victoria
     else:
@@ -76,9 +84,33 @@ label victoria:
 
     if goblinFriend:
         gb "¡Lo lograste! Sos genial."
+    else:
+        "pasa algo distinto."
+
+
+    menu:
+        "Opción a." if goblinFriend:
+            "Solo aparece si el goblin."
+        "Opción b." if not goblinFriend:
+            "Solo si no está con vos."
 
     return
 
 label derrota:
     "¡Es el fin!"
     return
+
+
+label store:
+    "Llegas a una tienda."
+    "Tenés distintas cosas para comprar."
+
+    menu:
+        "Botella.":
+            if p_gold >= item_1_precio:
+                "Compraste una botella."
+                $ p_gold -= item_1_precio
+            else:
+                "No tenés suficiente dinero."               
+        "Salir.":
+            "Te fuiste de la tienda."
