@@ -1619,3 +1619,19 @@ style slider_vbox:
 style slider_slider:
     variant "small"
     xsize 900
+
+##### new screen for Ian
+
+screen Tienda():
+    hbox:
+        vbox:
+            spacing 10
+            align (0.5, 0.25)
+            image "vendedor.png"
+            textbutton "Cerrar" action Return()
+        frame:
+            align (0.5, 0.75)
+            vbox:
+                spacing 10
+                for item in items_tienda:
+                    textbutton "Comprar [item]" action SetVariable("p_arma", item)

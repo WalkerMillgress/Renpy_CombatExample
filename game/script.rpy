@@ -8,6 +8,15 @@ default p_atk = 0
 default p_def = 0
 default p_def_mod = 0
 default p_gold = 6
+default p_arma = ""
+
+default items_tienda = [
+    "Hacha",
+    "Lanza",
+    "Espada",
+    "Piedra"
+]
+
 
 default goblinFriend = False
 
@@ -23,18 +32,9 @@ label start:
 
     p "Antes de comenzar, elige tu arma."
 
-    menu:
-        "Espada.":
-            $ p_atk = 7
-            "Escogiste una espada."
-        "Lanza.":
-            $ p_atk = 5
-            $ p_def = 4
-            "Escogiste una lanza."
-        "Escudo.":
-            $ p_atk = 2
-            $ p_def = 10
-            "Escogiste un escudo."
+    call screen Tienda()
+
+    "Tienes un arma. Es [p_arma]."
 
     p "Bien hecho, ahora ve a luchar con el monstruo."
 
