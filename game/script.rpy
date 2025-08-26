@@ -11,10 +11,10 @@ default p_gold = 6
 default p_arma = ""
 
 default items_tienda = [
-    "Hacha",
-    "Lanza",
-    "Espada",
-    "Piedra"
+    ["Hacha", 5, 15],
+    ["Lanza", 7, 20],
+    ["Espada", 10, 12],
+    ["Piedra", 1, 5]
 ]
 
 

@@ -1634,4 +1634,13 @@ screen Tienda():
             vbox:
                 spacing 10
                 for item in items_tienda:
-                    textbutton "Comprar [item]" action SetVariable("p_arma", item)
+                    if p_gold >= item[1]:
+                        textbutton "Comprar [item[0]]": 
+                            action [
+                                SetVariable("p_arma", item[0]),
+                                SetVariable("p_atk", item[2]),
+                                SetVariable("p_gold", p_gold-item[1]),
+                                Return()
+                            ]
+                    else:
+                        text "No tienes suficiente oro para comprar [item[0]]."
